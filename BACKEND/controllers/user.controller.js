@@ -28,7 +28,7 @@ module.exports.registerUser = async (req, res) => {
 
     let token = await user.generateAuthToken();
 
-    res.status(201).json({token, user});
+    res.status(200).json({token, user});
 }
 
 module.exports.loginUser = async (req, res) => {
