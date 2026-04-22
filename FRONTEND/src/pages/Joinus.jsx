@@ -26,7 +26,7 @@ export default function JoinUsPage() {
         navigate("/profile");
       }
     } catch (error) {
-      console.log(error.response?.data?.error);
+      console.log(error.response);
       let Err = error.response?.data?.error;
       setError(Err);
 
@@ -78,7 +78,7 @@ export default function JoinUsPage() {
               {exist}
             </p>
           )}
-          
+
           {/* Username Field */}
           <div className="space-y-1">
             <input
