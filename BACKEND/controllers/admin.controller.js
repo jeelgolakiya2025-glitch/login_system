@@ -14,3 +14,8 @@ module.exports.AllUser = async(req, res) =>{
         return res.status(400).json({message: error.message})
     }
 }
+
+// delete single user
+module.exports.DeleteUser = async(req, res) => {
+    
+}
