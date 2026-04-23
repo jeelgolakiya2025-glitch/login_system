@@ -21,7 +21,7 @@ let userSchema = mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["user", "admin"], // acept only two values
+        enum: ["user", "admin", "manager"], // acept only two values
         default: "user",
     },
 });

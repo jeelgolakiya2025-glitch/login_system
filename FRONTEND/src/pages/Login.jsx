@@ -1,21 +1,41 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState({
+  const [formData, setformData] = useState({
     email: "",
     password: "",
   });
 
   const [error, setError] = useState("");
+  const [validation, setValidation] = useState("");
 
-  const submitForm = () => {
-    console.log("form submited");
+  const navigate = useNavigate();
+
+  const submitForm = async () => {
+    try {
+      let response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/login`,
+        formData,
+      );
+
+      if (response.status === 200) {
+        let data = response.data;
+        localStorage.setItem("token", data.token);
+        navigate("/profile");
+      }
+    } catch (error) {
+      console.log(error.response);
+      setError(error.response?.data?.message);
+      setValidation(error.response?.data?.error);
+      console.log(error.response?.data?.error)
+    }
   };
 
   const handleChange = (e) => {
-    setformData({email: })
-  }
+    setformData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center bg-slate-50 overflow-hidden">
@@ -42,6 +62,26 @@ export default function LoginPage() {
             submitForm();
           }}
         >
+          {error && (
+            <p className="text-red-400 bg-red-50 p-2 mb-1 rounded-xl">
+              {error}
+            </p>
+          )}
+
+          {validation && (
+            <div>
+              {validation.map((val, index) => {
+                return (
+                  <p
+                    key={index}
+                    className="text-red-400 bg-red-50 p-2 mb-1 rounded-xl"
+                  >
+                    {val.msg}
+                  </p>
+                );
+              })}
+            </div>
+          )}
           <div className="space-y-1">
             <input
               type="email"
