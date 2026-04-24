@@ -13,6 +13,7 @@ router.post(
 );
 
 // get all product
+router.get("/all", productController.GetAllProduct);
 
 // get single product
 
