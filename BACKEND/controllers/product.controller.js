@@ -12,6 +12,9 @@ module.exports.CreateProduct = async (req , res) => {
         }
 
         const product = await productService.CreateProduct({name, description, stock, price, discount, isNewProduct, sku, images, brand, category});
+
+        return res.status(200).json({msg: "product added successfully !!", product})
+        
     } catch (error) {
         return res.status(400).json({message: error.message})
     }
