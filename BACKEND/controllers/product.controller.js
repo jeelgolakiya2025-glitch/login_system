@@ -39,9 +39,9 @@ module.exports.GetAllProduct = async (req, res) => {
 // get single product
 module.exports.GetSingleProduct = async (req, res)=>{
     try {
-        const id = req.params.id;
+        const productId = req.params.id;
 
-        const product = await productService.GetSingleProduct(id);
+        const product = await productService.GetSingleProduct(productId);
 
         if(!product){
             return res.status(404).json({message: "product not found !!"})
@@ -56,5 +56,30 @@ module.exports.GetSingleProduct = async (req, res)=>{
 
 // update product
 module.exports.UpdateProduct = async (req, res) => {
-    
+    try{
+        const productId = req.params.id;
+        const {name, description, stock, price, discount, isNewProduct, sku, images, brand, category} = req.body;
+        const updateProduct = await productService.UpdateProduct(productId, {name, description, stock, price, discount, isNewProduct, sku, images, brand, category});
+
+        return res.status(200).json({message: "product update successfully !!", updateProduct})
+    } catch (error) {   
+        return res.status(400).json({message: error.message})
+    }
+}
+
+// delete product
+module.exports.DeleteProduct = async (req, res) => {
+    try {
+        const productId = req.params.id;
+
+        const product = await productService.DeleteProduct(productId);
+
+        if(!product){
+            return res.status(404).json({message: "product not found !!"})
+        }
+
+        return res.status(200).json({message: "product deleted successfully"})
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
 }

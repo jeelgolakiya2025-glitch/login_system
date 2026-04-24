@@ -69,7 +69,7 @@ module.exports.UpdateProduct = async (
   },
 ) => {
   const updateProduct = await productModel.findOneAndUpdate(
-    { _id: productId },
+    { _id: id },
     {
       name,
       description,
@@ -84,4 +84,13 @@ module.exports.UpdateProduct = async (
     },
     { new: true },
   );
+  if (!updateProduct) {
+    throw new Error("product not found !!");
+  }
+  return updateProduct;
+};
+
+// delete product
+module.exports.DeleteProduct = async (id) => {
+    return await productModel.findOneAndDelete({ _id: id });
 };
