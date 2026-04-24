@@ -32,7 +32,7 @@ let ProductSchema = mongoose.Schema(
       default: true,
     },
     sku: {
-      type: Number,
+      type: String,
       unique: true,
       required: true,
     },
