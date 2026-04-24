@@ -16,9 +16,12 @@ router.post(
 router.get("/all", productController.GetAllProduct);
 
 // get single product
+router.get("/:id", productController.GetSingleProduct)
 
 // update product
+router.put("/:id",userMiddleware.authUser, roleMiddleware.allowRoles("admin","manager"))
 
 // delete product
+
 
 module.exports = router;

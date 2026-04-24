@@ -35,3 +35,26 @@ module.exports.GetAllProduct = async (req, res) => {
         return res.status(400).json({message: error.message})
     }
 }
+
+// get single product
+module.exports.GetSingleProduct = async (req, res)=>{
+    try {
+        const id = req.params.id;
+
+        const product = await productService.GetSingleProduct(id);
+
+        if(!product){
+            return res.status(404).json({message: "product not found !!"})
+        }
+
+        return res.status(200).json({message: "product fetch successfully !!", product})
+
+    } catch (error) {
+        return res.status(400).json({message: error.message})
+    }
+}
+
+// update product
+module.exports.UpdateProduct = async (req, res) => {
+    
+}
