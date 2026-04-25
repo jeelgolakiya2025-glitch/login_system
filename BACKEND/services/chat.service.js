@@ -29,5 +29,5 @@ const getStaticReply = (message) => {
 };
 
 module.exports.BotReplay = async (message) => {
-    return getStaticReply();
+    return getStaticReply(message);
 }

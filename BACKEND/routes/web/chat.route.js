@@ -4,7 +4,7 @@ const router = express.Router();
 const chatController = require("../../controllers/chat.controller")
 
 // rule based Chatbot 
-router.get("/chat",chatController.StaticBot)
+router.post("/chat",chatController.StaticBot)
 
 
 module.exports = router;
